@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class Client {
 
     private String name;
-    public enum Gender { MALE, FEMALE }
     private Gender gender;
     private ArrayList<Account> accounts = new ArrayList<>();
     private Account activeAccount;
