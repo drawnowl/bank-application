@@ -17,11 +17,11 @@ public class Main {
         CheckingAccount standartCheckingAccount = new CheckingAccount(250, 50);
         SavingAccount standartSavingAccount = new SavingAccount(50);
 
-        bank.addClient(clientNick = new Client("Nick", Client.Gender.MALE));
-        bank.addClient(clientSharon = new Client("Sharon", Client.Gender.FEMALE));
-        bank.addClient(clientSteve = new Client("Steve", Client.Gender.MALE));
-        bank.addClient(clientBen = new Client("Ben", Client.Gender.MALE));
-        bank.addClient(clientOlga = new Client("Olga", Client.Gender.FEMALE));
+        bank.addClient(clientNick = new Client("Nick", Gender.MALE));
+        bank.addClient(clientSharon = new Client("Sharon", Gender.FEMALE));
+        bank.addClient(clientSteve = new Client("Steve", Gender.MALE));
+        bank.addClient(clientBen = new Client("Ben", Gender.MALE));
+        bank.addClient(clientOlga = new Client("Olga", Gender.FEMALE));
 
         clientBen.addAccount(standartCheckingAccount);
         clientBen.addAccount(standartSavingAccount);
