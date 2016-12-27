@@ -1,3 +1,5 @@
+package accounts;
+
 public class CheckingAccount extends Account {
 
     private double overdraft;
@@ -13,9 +15,9 @@ public class CheckingAccount extends Account {
     }
 
     @Override
-    public void takeMoney(double sum) {
-        if(getBalance() + overdraft > sum) {
-             setBalance(getBalance() - sum);
+    public void withdraw(double money) {
+        if(getBalance() + overdraft > money) {
+             setBalance(getBalance() - money);
         } else {
             System.out.println("Not enough money");
         }

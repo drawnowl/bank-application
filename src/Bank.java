@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 class Bank {
 
@@ -8,8 +10,8 @@ class Bank {
         clients.add(client);
     }
 
-    ArrayList<Client> getAllClients() {
-        return clients;
+    List<Client> getAllClients() {
+        return Collections.unmodifiableList(clients);
     }
 
     void getClientFullInfo(String name) {

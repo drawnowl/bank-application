@@ -1,3 +1,5 @@
+package accounts;
+
 public abstract class Account {
 
     private double balance;
@@ -14,21 +16,21 @@ public abstract class Account {
         return balance;
     }
 
-    protected void setBalance(double sum) {
-        this.balance = sum;
+    protected void setBalance(double money) {
+        this.balance = money;
     }
 
-    public void addMoney(double sum) {
-        if(sum >= 0) {
-            balance += sum;
+    public void deposit(double money) {
+        if(money >= 0) {
+            balance += money;
         } else {
             System.out.println("Wrong input");
         }
     }
 
-    public void takeMoney(double sum) {
-        if(sum <= balance) {
-            balance -= sum;
+    public void withdraw(double money) {
+        if(money <= balance) {
+            balance -= money;
         } else {
             System.out.println("Not enough money");
         }

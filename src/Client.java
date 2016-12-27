@@ -1,9 +1,10 @@
+import accounts.Account;
+
 import java.util.ArrayList;
 
 public class Client {
 
     private String name;
-    public enum Gender { MALE, FEMALE }
     private Gender gender;
     private ArrayList<Account> accounts = new ArrayList<>();
     private Account activeAccount;
@@ -47,10 +48,10 @@ public class Client {
             activeAccount = account;
             return;
         }
-        System.out.println("Account is not contains in client list");
+        System.out.println("accounts.Account is not contains in client list");
     }
 
-    double getTotalBalance() {
+    private double getTotalBalance() {
         double result = 0;
         for (Account account: accounts) {
             result += account.getBalance();
@@ -60,7 +61,8 @@ public class Client {
 
     @Override
     public String toString() {
-        return "name: " + name + ". gender: " + gender + ". Accounts:" + accounts.toString() + ". Total balance: " + getTotalBalance();
+        return "name: " + name + ". gender: " + gender + ". Accounts:" +
+                accounts.toString() + ". Total balance: " + getTotalBalance();
     }
 
     @Override
