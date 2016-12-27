@@ -8,14 +8,8 @@ class Bank {
         clients.add(client);
     }
 
-   void getAllClients() {
-       if(clients.size() != 0) {
-           for (Client client: clients) {
-               System.out.println(client.toString());
-           }
-           return;
-       }
-       System.out.println("Nobody here :( ");
+    ArrayList<Client> getAllClients() {
+        return clients;
     }
 
     void getClientFullInfo(String name) {

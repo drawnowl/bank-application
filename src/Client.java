@@ -53,7 +53,7 @@ public class Client {
     double getTotalBalance() {
         double result = 0;
         for (Account account: accounts) {
-            result += account.checkBalance();
+            result += account.getBalance();
         }
         return result;
     }
