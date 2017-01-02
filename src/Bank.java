@@ -4,10 +4,21 @@ import java.util.List;
 
 class Bank {
 
+    private ArrayList<ClientRegistrationListener> listeners = new ArrayList<>();
     private ArrayList<Client> clients = new ArrayList<>();
+
+    void addListener(ClientRegistrationListener listener) {
+        listeners.add(listener);
+    }
 
     void addClient(Client client) {
         clients.add(client);
+
+        if(!listeners.isEmpty()) {
+            for (ClientRegistrationListener listener : listeners) {
+                listener.onClientAdded(client);
+            }
+        }
     }
 
     List<Client> getAllClients() {
