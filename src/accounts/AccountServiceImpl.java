@@ -22,9 +22,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void transfer(Account fromAccount, Account toAccount, double amount) {
-        if(amount > 0 & fromAccount.getBalance() - amount >= 0) {
-            fromAccount.setBalance(fromAccount.getBalance() - amount);
-            toAccount.setBalance(toAccount.getBalance() + amount);
+        if(amount >= 0 & fromAccount.getBalance() >= amount) {
+            fromAccount.withdraw(amount);
+            toAccount.deposit(amount);
         } else {
             System.out.println("Not enough money");
         }
