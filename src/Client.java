@@ -26,9 +26,6 @@ public class Client {
         if(accounts.isEmpty()) {
             System.out.println("No accounts on this client");
         }
-        for (Account account: accounts) {
-            System.out.print(account + ". ");
-        }
         return accounts;
     }
 

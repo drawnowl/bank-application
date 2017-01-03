@@ -12,6 +12,14 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Bank bank = new Bank();
 
+        PrintClientListener printClientListener = new PrintClientListener();
+        EmailNotificationListener emailNotificationListener = new EmailNotificationListener();
+        RegistrationLoggerListener registrationLoggerListener = new RegistrationLoggerListener();
+
+        bank.addListener(printClientListener);
+        bank.addListener(emailNotificationListener);
+        bank.addListener(registrationLoggerListener);
+
         Client clientNick;
         Client clientSteve;
         Client clientBen;
@@ -47,6 +55,5 @@ public class Main {
         clientOlga.addAccount(standartSavingAccount);
         clientOlga.addAccount(standartCheckingAccount);
 
-        bank.getClientFullInfo(reader.readLine());
     }
 }

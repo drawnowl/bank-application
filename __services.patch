@@ -1,0 +1,295 @@
+Index: src/Bank.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Bank.java	(revision 445915a28f6fbc8f837037fa9d91583974d89391)
++++ src/Bank.java	(revision e39a832759e6615d575fba88dca748b32cbc48db)
+@@ -1,5 +1,4 @@
+ import java.util.ArrayList;
+-import java.util.Collections;
+ import java.util.List;
+ 
+ class Bank {
+@@ -20,9 +19,14 @@
+             }
+         }
+     }
++    void removeClient(Client client) {
++        if(clients.contains(client)) {
++            clients.remove(client);
++        }
++    }
+ 
+     List<Client> getAllClients() {
+-        return Collections.unmodifiableList(clients);
++        return clients;
+     }
+ 
+     void getClientFullInfo(String name) {
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Main.java	(revision 445915a28f6fbc8f837037fa9d91583974d89391)
++++ src/Main.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
+@@ -55,6 +55,5 @@
+         clientOlga.addAccount(standartSavingAccount);
+         clientOlga.addAccount(standartCheckingAccount);
+ 
+-
+     }
+ }
+Index: src/Client.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Client.java	(revision 445915a28f6fbc8f837037fa9d91583974d89391)
++++ src/Client.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
+@@ -26,9 +26,6 @@
+         if(accounts.isEmpty()) {
+             System.out.println("No accounts on this client");
+         }
+-        for (Account account: accounts) {
+-            System.out.print(account + ". ");
+-        }
+         return accounts;
+     }
+ 
+Index: src/ClientService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/ClientService.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
++++ src/ClientService.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
+@@ -0,0 +1,10 @@
++import java.util.List;
++
++public interface ClientService {
++
++    Client findClientByName(Bank bank, String name);
++    List<Client> findAllClients(Bank bank);
++    Client saveClient(Bank bank, Client client);
++    void deleteClient(Bank bank, Client client);
++
++}
+Index: src/BankReportService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/BankReportService.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
++++ src/BankReportService.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
+@@ -0,0 +1,11 @@
++import java.util.List;
++
++public interface BankReportService {
++
++    int getNumberOfClients(Bank bank);
++    int getNumberOfAccounts(Bank bank);
++    double getTotalAccountSum(Bank bank);
++    double getBankCreditSum(Bank bank);
++    List<Client> getClientsSortedByName(Bank bank);
++
++}
+Index: src/ClientServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/ClientServiceImpl.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
++++ src/ClientServiceImpl.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
+@@ -0,0 +1,36 @@
++import java.util.List;
++
++public class ClientServiceImpl implements ClientService {
++
++    @Override
++    public Client findClientByName(Bank bank, String name) {
++        List<Client> clients = bank.getAllClients();
++        for (Client client: clients) {
++            if (client.getName().equals(name)) {
++                return client;
++            }
++        }
++        return null;
++    }
++
++    @Override
++    public List<Client> findAllClients(Bank bank) {
++
++        List<Client> clients = bank.getAllClients();
++        return clients;
++    }
++
++    @Override
++    public Client saveClient(Bank bank, Client client) {
++        List<Client> clients = bank.getAllClients();
++        if(clients.contains(client)) {
++            return client;
++        }
++        return null;
++    }
++
++    @Override
++    public void deleteClient(Bank bank, Client client) {
++        bank.removeClient(client);
++    }
++}
+Index: src/BankReportServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/BankReportServiceImpl.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
++++ src/BankReportServiceImpl.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
+@@ -0,0 +1,71 @@
++import accounts.Account;
++
++import java.util.Collections;
++import java.util.Comparator;
++import java.util.List;
++
++public class BankReportServiceImpl implements BankReportService {
++
++    @Override
++    public int getNumberOfClients(Bank bank) {
++        return bank.getAllClients().size();
++    }
++
++    @Override
++    public int getNumberOfAccounts(Bank bank) {
++
++        int result = 0;
++        List<Client> clients = bank.getAllClients();
++
++        for (Client client: clients) {
++            result += client.getAccounts().size();
++        }
++        return result;
++    }
++
++    @Override
++    public double getTotalAccountSum(Bank bank) {
++
++        int result = 0;
++        List<Client> clients = bank.getAllClients();
++        List<Account> accounts;
++
++        for (Client client: clients) {
++            accounts = client.getAccounts();
++            for (int i = 0; i < accounts.size(); i++) {
++                result += accounts.get(i).getBalance();
++            }
++        }
++        return result;
++    }
++
++    @Override
++    public double getBankCreditSum(Bank bank) {
++
++        int result = 0;
++        List<Client> clients = bank.getAllClients();
++        List<Account> accounts;
++
++        for (Client client: clients) {
++            accounts = client.getAccounts();
++            for (int i = 0; i < accounts.size(); i++) {
++                if(accounts.get(i).getBalance() < 0) {
++                    result -= accounts.get(i).getBalance();
++                }
++            }
++        }
++        return result;
++    }
++
++    @Override
++    public List<Client> getClientsSortedByName(Bank bank) {
++
++        List<Client> clients = bank.getAllClients();
++        Collections.sort(clients, new Comparator<Client>() {
++            public int compare(Client o1, Client o2) {
++                return o1.getName().compareTo(o2.getName());
++            }
++        });
++        return clients;
++    }
++}
+Index: src/accounts/AccountService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/accounts/AccountService.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
++++ src/accounts/AccountService.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
+@@ -0,0 +1,12 @@
++package accounts;
++
++import accounts.Account;
++
++public interface AccountService {
++
++    void deposit(Account account, double amount);
++    void withdraw(Account account, double amount);
++    void transfer(Account fromAccount, Account toAccount, double amount);
++
++}
++
+Index: src/RegistrationLoggerListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/RegistrationLoggerListener.java	(revision 445915a28f6fbc8f837037fa9d91583974d89391)
++++ src/RegistrationLoggerListener.java	(revision 6815668323eb54509e55f4815e76adf4bc931ff1)
+@@ -5,7 +5,6 @@
+ 
+     private String pattern = "yyyy-MM-dd : hh-mm-ss";
+     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+-
+     private String date = simpleDateFormat.format(new Date());
+ 
+     @Override
+Index: src/accounts/AccountServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/accounts/AccountServiceImpl.java	(revision e39a832759e6615d575fba88dca748b32cbc48db)
++++ src/accounts/AccountServiceImpl.java	(revision e39a832759e6615d575fba88dca748b32cbc48db)
+@@ -0,0 +1,32 @@
++package accounts;
++
++public class AccountServiceImpl implements AccountService {
++
++    @Override
++    public void deposit(Account account, double amount) {
++        if(amount >= 0) {
++            account.setBalance(account.getBalance() + amount);
++        } else {
++            System.out.println("Wrong input");
++        }
++    }
++
++    @Override
++    public void withdraw(Account account, double amount) {
++        if(amount <= account.getBalance()) {
++            account.setBalance(account.getBalance() - amount);
++        } else {
++            System.out.println("Not enough money");
++        }
++    }
++
++    @Override
++    public void transfer(Account fromAccount, Account toAccount, double amount) {
++        if(amount >= 0 & fromAccount.getBalance() >= amount) {
++            fromAccount.withdraw(amount);
++            toAccount.deposit(amount);
++        } else {
++            System.out.println("Not enough money");
++        }
++    }
++}
