@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 class Bank {
@@ -20,9 +19,14 @@ class Bank {
             }
         }
     }
+    void removeClient(Client client) {
+        if(clients.contains(client)) {
+            clients.remove(client);
+        }
+    }
 
     List<Client> getAllClients() {
-        return Collections.unmodifiableList(clients);
+        return clients;
     }
 
     void getClientFullInfo(String name) {
