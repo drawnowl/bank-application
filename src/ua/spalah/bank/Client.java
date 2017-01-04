@@ -1,4 +1,6 @@
-import accounts.Account;
+package ua.spalah.bank;
+
+import ua.spalah.bank.accounts.Account;
 
 import java.util.ArrayList;
 
@@ -24,7 +26,7 @@ public class Client {
 
     public ArrayList<Account> getAccounts() {
         if(accounts.isEmpty()) {
-            System.out.println("No accounts on this client");
+            System.out.println("No ua.spalah.bank.accounts on this client");
         }
         return accounts;
     }
@@ -45,7 +47,7 @@ public class Client {
             activeAccount = account;
             return;
         }
-        System.out.println("accounts.Account is not contains in client list");
+        System.out.println("ua.spalah.bank.accounts.Account is not contains in client list");
     }
 
     double getTotalBalance() {

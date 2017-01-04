@@ -1,3 +1,5 @@
+package ua.spalah.bank;
+
 import java.util.List;
 
 public class ClientServiceImpl implements ClientService {

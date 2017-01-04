@@ -1,3 +1,5 @@
+package ua.spalah.bank;
+
 public class EmailNotificationListener implements ClientRegistrationListener {
 
     @Override

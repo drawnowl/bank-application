@@ -1,4 +1,6 @@
-import accounts.Account;
+package ua.spalah.bank;
+
+import ua.spalah.bank.accounts.Account;
 
 import java.util.Collections;
 import java.util.Comparator;

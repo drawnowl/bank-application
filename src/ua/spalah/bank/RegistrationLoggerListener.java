@@ -1,3 +1,5 @@
+package ua.spalah.bank;
+
 import java.time.LocalDateTime;
 
 public class RegistrationLoggerListener implements ClientRegistrationListener {

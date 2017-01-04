@@ -1,5 +1,7 @@
-import accounts.CheckingAccount;
-import accounts.SavingAccount;
+package ua.spalah.bank;
+
+import ua.spalah.bank.accounts.CheckingAccount;
+import ua.spalah.bank.accounts.SavingAccount;
 
 import java.io.BufferedReader;
 import java.io.IOException;

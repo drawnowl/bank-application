@@ -1,3 +1,5 @@
+package ua.spalah.bank;
+
 public class PrintClientListener implements ClientRegistrationListener {
 
     @Override

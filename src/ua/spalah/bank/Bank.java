@@ -1,7 +1,9 @@
+package ua.spalah.bank;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class Bank {
+public class Bank {
 
     private ArrayList<ClientRegistrationListener> listeners = new ArrayList<>();
     private ArrayList<Client> clients = new ArrayList<>();
