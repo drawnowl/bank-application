@@ -22,11 +22,6 @@ class Bank {
             clients.remove(client);
         }
     }
-    void removeClient(Client client) {
-        if(clients.contains(client)) {
-            clients.remove(client);
-        }
-    }
 
     List<Client> getAllClients() {
         return clients;
