@@ -1,10 +1,14 @@
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RegistrationLoggerListener implements ClientRegistrationListener {
 
+    private String pattern = "yyyy-MM-dd : hh-mm-ss";
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    private String date = simpleDateFormat.format(new Date());
+
     @Override
     public void onClientAdded(Client c) {
-        LocalDateTime localDateTime = LocalDateTime.now();
-        System.out.println(c.getName() + " added on: " + localDateTime);
+        System.out.println(c.getName() + " added on: " + date);
     }
 }
