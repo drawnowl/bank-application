@@ -54,6 +54,5 @@ public class Main {
         clientOlga.addAccount(standartCheckingAccount);
         clientOlga.addAccount(standartSavingAccount);
         clientOlga.addAccount(standartCheckingAccount);
-
     }
 }

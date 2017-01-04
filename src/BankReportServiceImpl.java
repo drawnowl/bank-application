@@ -13,7 +13,6 @@ public class BankReportServiceImpl implements BankReportService {
 
     @Override
     public int getNumberOfAccounts(Bank bank) {
-
         int result = 0;
         List<Client> clients = bank.getAllClients();
 
@@ -25,7 +24,6 @@ public class BankReportServiceImpl implements BankReportService {
 
     @Override
     public double getTotalAccountSum(Bank bank) {
-
         double result = 0;
         List<Client> clients = bank.getAllClients();
 
@@ -37,7 +35,6 @@ public class BankReportServiceImpl implements BankReportService {
 
     @Override
     public double getBankCreditSum (Bank bank) {
-
         double result = 0;
         List<Client> clients = bank.getAllClients();
         List<Account> accounts;
@@ -55,7 +52,6 @@ public class BankReportServiceImpl implements BankReportService {
 
     @Override
     public List<Client> getClientsSortedByName (Bank bank){
-
         List<Client> clients = bank.getAllClients();
         Collections.sort(clients, new Comparator<Client>() {
             public int compare(Client o1, Client o2) {
