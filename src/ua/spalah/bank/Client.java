@@ -16,7 +16,7 @@ public class Client {
         this.gender = gender;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
@@ -50,7 +50,7 @@ public class Client {
         System.out.println("ua.spalah.bank.accounts.Account is not contains in client list");
     }
 
-    double getTotalBalance() {
+    public double getTotalBalance() {
         double result = 0;
         for (Account account: accounts) {
             result += account.getBalance();

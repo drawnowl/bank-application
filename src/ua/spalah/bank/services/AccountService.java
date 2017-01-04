@@ -1,4 +1,6 @@
-package ua.spalah.bank.accounts;
+package ua.spalah.bank.services;
+
+import ua.spalah.bank.accounts.Account;
 
 public interface AccountService {
 

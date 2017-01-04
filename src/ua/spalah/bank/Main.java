@@ -2,6 +2,9 @@ package ua.spalah.bank;
 
 import ua.spalah.bank.accounts.CheckingAccount;
 import ua.spalah.bank.accounts.SavingAccount;
+import ua.spalah.bank.listeners.EmailNotificationListener;
+import ua.spalah.bank.listeners.PrintClientListener;
+import ua.spalah.bank.listeners.RegistrationLoggerListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;

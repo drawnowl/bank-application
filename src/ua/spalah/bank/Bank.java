@@ -1,5 +1,7 @@
 package ua.spalah.bank;
 
+import ua.spalah.bank.listeners.ClientRegistrationListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,20 +14,20 @@ public class Bank {
         listeners.add(listener);
     }
 
-    void addClient(Client client) {
+    public void addClient(Client client) {
         clients.add(client);
         for (ClientRegistrationListener listener : listeners) {
             listener.onClientAdded(client);
         }
     }
 
-    void removeClient(Client client) {
+    public void removeClient(Client client) {
         if(clients.contains(client)) {
             clients.remove(client);
         }
     }
 
-    List<Client> getAllClients() {
+    public List<Client> getAllClients() {
         return clients;
     }
 

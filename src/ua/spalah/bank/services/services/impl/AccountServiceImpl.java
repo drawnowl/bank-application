@@ -1,4 +1,7 @@
-package ua.spalah.bank.accounts;
+package ua.spalah.bank.services.services.impl;
+
+import ua.spalah.bank.accounts.Account;
+import ua.spalah.bank.services.AccountService;
 
 public class AccountServiceImpl implements AccountService {
 
