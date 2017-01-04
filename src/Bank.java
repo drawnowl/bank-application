@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Bank {
+class Bank {
 
     private ArrayList<ClientRegistrationListener> listeners = new ArrayList<>();
     private ArrayList<Client> clients = new ArrayList<>();
@@ -13,9 +13,9 @@ public class Bank {
 
     void addClient(Client client) {
         clients.add(client);
-         for (ClientRegistrationListener listener : listeners) {
-                listener.onClientAdded(client);
-         }
+        for (ClientRegistrationListener listener : listeners) {
+            listener.onClientAdded(client);
+        }
     }
 
     void removeClient(Client client) {
