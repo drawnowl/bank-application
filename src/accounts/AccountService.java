@@ -1,10 +1,5 @@
 package accounts;
 
-<<<<<<< HEAD
-=======
-import accounts.Account;
-
->>>>>>> origin/master
 public interface AccountService {
 
     void deposit(Account account, double amount);

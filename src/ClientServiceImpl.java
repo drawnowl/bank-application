@@ -15,26 +15,14 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<Client> findAllClients(Bank bank) {
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
         List<Client> clients = bank.getAllClients();
         return clients;
     }
 
     @Override
     public Client saveClient(Bank bank, Client client) {
-<<<<<<< HEAD
         bank.addClient(client);
         return client;
-=======
-        List<Client> clients = bank.getAllClients();
-        if(clients.contains(client)) {
-            return client;
-        }
-        return null;
->>>>>>> origin/master
     }
 
     @Override

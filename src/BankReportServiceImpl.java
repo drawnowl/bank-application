@@ -17,7 +17,7 @@ public class BankReportServiceImpl implements BankReportService {
         int result = 0;
         List<Client> clients = bank.getAllClients();
 
-        for (Client client: clients) {
+        for (Client client : clients) {
             result += client.getAccounts().size();
         }
         return result;
@@ -26,43 +26,27 @@ public class BankReportServiceImpl implements BankReportService {
     @Override
     public double getTotalAccountSum(Bank bank) {
 
-        int result = 0;
+        double result = 0;
         List<Client> clients = bank.getAllClients();
-<<<<<<< HEAD
 
-        for (Client client: clients) {
-           result += client.getTotalBalance();
-=======
-        List<Account> accounts;
-
-        for (Client client: clients) {
-            accounts = client.getAccounts();
-            for (int i = 0; i < accounts.size(); i++) {
-                result += accounts.get(i).getBalance();
-            }
->>>>>>> origin/master
+        for (Client client : clients) {
+            result += client.getTotalBalance();
         }
         return result;
     }
 
     @Override
-    public double getBankCreditSum(Bank bank) {
+    public double getBankCreditSum (Bank bank) {
 
-        int result = 0;
+        double result = 0;
         List<Client> clients = bank.getAllClients();
         List<Account> accounts;
 
-        for (Client client: clients) {
+        for (Client client : clients) {
             accounts = client.getAccounts();
-<<<<<<< HEAD
-            for (Account account: accounts) {
-                if(account.getBalance() < 0) {
+            for (Account account : accounts) {
+                if (account.getBalance() < 0) {
                     result -= account.getBalance();
-=======
-            for (int i = 0; i < accounts.size(); i++) {
-                if(accounts.get(i).getBalance() < 0) {
-                    result -= accounts.get(i).getBalance();
->>>>>>> origin/master
                 }
             }
         }
@@ -70,7 +54,7 @@ public class BankReportServiceImpl implements BankReportService {
     }
 
     @Override
-    public List<Client> getClientsSortedByName(Bank bank) {
+    public List<Client> getClientsSortedByName (Bank bank){
 
         List<Client> clients = bank.getAllClients();
         Collections.sort(clients, new Comparator<Client>() {

@@ -4,20 +4,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void deposit(Account account, double amount) {
-        if(amount >= 0) {
-            account.setBalance(account.getBalance() + amount);
-        } else {
-            System.out.println("Wrong input");
-        }
+        account.deposit(amount);
     }
 
     @Override
     public void withdraw(Account account, double amount) {
-        if(amount <= account.getBalance()) {
-            account.setBalance(account.getBalance() - amount);
-        } else {
-            System.out.println("Not enough money");
-        }
+        account.withdraw(amount);
     }
 
     @Override
