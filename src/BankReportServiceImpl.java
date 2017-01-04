@@ -28,13 +28,9 @@ public class BankReportServiceImpl implements BankReportService {
 
         int result = 0;
         List<Client> clients = bank.getAllClients();
-        List<Account> accounts;
 
         for (Client client: clients) {
-            accounts = client.getAccounts();
-            for (int i = 0; i < accounts.size(); i++) {
-                result += accounts.get(i).getBalance();
-            }
+           result += client.getTotalBalance();
         }
         return result;
     }
@@ -48,9 +44,9 @@ public class BankReportServiceImpl implements BankReportService {
 
         for (Client client: clients) {
             accounts = client.getAccounts();
-            for (int i = 0; i < accounts.size(); i++) {
-                if(accounts.get(i).getBalance() < 0) {
-                    result -= accounts.get(i).getBalance();
+            for (Account account: accounts) {
+                if(account.getBalance() < 0) {
+                    result -= account.getBalance();
                 }
             }
         }

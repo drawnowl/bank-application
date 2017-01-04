@@ -48,7 +48,7 @@ public class Client {
         System.out.println("accounts.Account is not contains in client list");
     }
 
-    private double getTotalBalance() {
+    double getTotalBalance() {
         double result = 0;
         for (Account account: accounts) {
             result += account.getBalance();

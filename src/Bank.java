@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-class Bank {
+public class Bank {
 
     private ArrayList<ClientRegistrationListener> listeners = new ArrayList<>();
     private ArrayList<Client> clients = new ArrayList<>();
@@ -12,13 +13,11 @@ class Bank {
 
     void addClient(Client client) {
         clients.add(client);
-
-        if(!listeners.isEmpty()) {
-            for (ClientRegistrationListener listener : listeners) {
+         for (ClientRegistrationListener listener : listeners) {
                 listener.onClientAdded(client);
-            }
-        }
+         }
     }
+
     void removeClient(Client client) {
         if(clients.contains(client)) {
             clients.remove(client);
@@ -26,7 +25,7 @@ class Bank {
     }
 
     List<Client> getAllClients() {
-        return clients;
+        return Collections.unmodifiableList(clients);
     }
 
     void getClientFullInfo(String name) {
