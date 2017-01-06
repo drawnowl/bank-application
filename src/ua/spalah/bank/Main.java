@@ -1,10 +1,10 @@
 package ua.spalah.bank;
 
-import ua.spalah.bank.accounts.CheckingAccount;
-import ua.spalah.bank.accounts.SavingAccount;
-import ua.spalah.bank.listeners.EmailNotificationListener;
-import ua.spalah.bank.listeners.PrintClientListener;
-import ua.spalah.bank.listeners.RegistrationLoggerListener;
+import ua.spalah.bank.exceptions.ClientNotFoundException;
+import ua.spalah.bank.models.*;
+import ua.spalah.bank.services.impl.AccountServiceImpl;
+import ua.spalah.bank.services.impl.BankReportServiceImpl;
+import ua.spalah.bank.services.impl.ClientServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,52 +12,49 @@ import java.io.InputStreamReader;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClientNotFoundException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Bank bank = new Bank();
-
-        PrintClientListener printClientListener = new PrintClientListener();
-        EmailNotificationListener emailNotificationListener = new EmailNotificationListener();
-        RegistrationLoggerListener registrationLoggerListener = new RegistrationLoggerListener();
-
-        bank.addListener(printClientListener);
-        bank.addListener(emailNotificationListener);
-        bank.addListener(registrationLoggerListener);
-
-        Client clientNick;
-        Client clientSteve;
-        Client clientBen;
-        Client clientSharon;
-        Client clientOlga;
+        AccountServiceImpl accountService = new AccountServiceImpl();
+        BankReportServiceImpl bankReportService = new BankReportServiceImpl();
+        ClientServiceImpl clientService = new ClientServiceImpl();
 
         CheckingAccount standartCheckingAccount = new CheckingAccount(250, 50);
         SavingAccount standartSavingAccount = new SavingAccount(50);
 
-        bank.addClient(clientNick = new Client("Nick", Gender.MALE));
-        bank.addClient(clientSharon = new Client("Sharon", Gender.FEMALE));
-        bank.addClient(clientSteve = new Client("Steve", Gender.MALE));
-        bank.addClient(clientBen = new Client("Ben", Gender.MALE));
-        bank.addClient(clientOlga = new Client("Olga", Gender.FEMALE));
+        Client nick = new Client("Nick", Gender.MALE);
+        Client sharon = new Client("Sharon", Gender.FEMALE);
+        Client steve = new Client("Steve", Gender.MALE);
+        Client ben = new Client("Ben", Gender.MALE);
+        Client olga = new Client("Olga", Gender.FEMALE);
 
-        clientBen.addAccount(standartCheckingAccount);
-        clientBen.addAccount(standartSavingAccount);
-        clientBen.addAccount(standartCheckingAccount);
+        clientService.addAccount(standartCheckingAccount, nick);
+        clientService.addAccount(standartCheckingAccount, nick);
+        clientService.addAccount(standartSavingAccount, nick);
+        clientService.addAccount(standartCheckingAccount, nick);
 
-        clientNick.addAccount(standartCheckingAccount);
-        clientNick.addAccount(standartSavingAccount);
-        clientNick.addAccount(standartCheckingAccount);
+        clientService.addAccount(standartCheckingAccount, sharon);
+        clientService.addAccount(standartSavingAccount, sharon);
+        clientService.addAccount(standartCheckingAccount, sharon);
 
-        clientSteve.addAccount(standartCheckingAccount);
-        clientSteve.addAccount(standartSavingAccount);
-        clientSteve.addAccount(standartCheckingAccount);
+        clientService.addAccount(standartCheckingAccount, steve);
+        clientService.addAccount(standartSavingAccount, steve);
+        clientService.addAccount(standartCheckingAccount, steve);
 
-        clientSharon.addAccount(standartCheckingAccount);
-        clientSharon.addAccount(standartSavingAccount);
-        clientSharon.addAccount(standartCheckingAccount);
+        clientService.addAccount(standartCheckingAccount, ben);
+        clientService.addAccount(standartSavingAccount, ben);
+        clientService.addAccount(standartCheckingAccount, ben);
 
-        clientOlga.addAccount(standartCheckingAccount);
-        clientOlga.addAccount(standartSavingAccount);
-        clientOlga.addAccount(standartCheckingAccount);
+        clientService.addAccount(standartCheckingAccount, olga);
+        clientService.addAccount(standartSavingAccount, olga);
+        clientService.addAccount(standartCheckingAccount, olga);
+
+        clientService.saveClient(bank, nick);
+        clientService.saveClient(bank, sharon);
+        clientService.saveClient(bank, steve);
+        clientService.saveClient(bank, olga);
+
+        System.out.println(bankReportService.getNumberOfAccounts(bank));
     }
 }

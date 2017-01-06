@@ -1,7 +1,7 @@
 package ua.spalah.bank.services;
 
-import ua.spalah.bank.Bank;
-import ua.spalah.bank.Client;
+import ua.spalah.bank.models.Bank;
+import ua.spalah.bank.models.Client;
 
 import java.util.List;
 
@@ -12,5 +12,4 @@ public interface BankReportService {
     double getTotalAccountSum(Bank bank);
     double getBankCreditSum(Bank bank);
     List<Client> getClientsSortedByName(Bank bank);
-
 }
