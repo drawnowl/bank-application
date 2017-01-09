@@ -1,6 +1,7 @@
 package ua.spalah.bank;
 
 import ua.spalah.bank.exceptions.ClientNotFoundException;
+import ua.spalah.bank.exceptions.NotEnoughFundsException;
 import ua.spalah.bank.models.*;
 import ua.spalah.bank.services.impl.AccountServiceImpl;
 import ua.spalah.bank.services.impl.BankReportServiceImpl;
@@ -12,7 +13,7 @@ import java.io.InputStreamReader;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, ClientNotFoundException {
+    public static void main(String[] args) throws IOException, ClientNotFoundException, NotEnoughFundsException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Bank bank = new Bank();
@@ -30,9 +31,7 @@ public class Main {
         Client olga = new Client("Olga", Gender.FEMALE);
 
         clientService.addAccount(standartCheckingAccount, nick);
-        clientService.addAccount(standartCheckingAccount, nick);
         clientService.addAccount(standartSavingAccount, nick);
-        clientService.addAccount(standartCheckingAccount, nick);
 
         clientService.addAccount(standartCheckingAccount, sharon);
         clientService.addAccount(standartSavingAccount, sharon);
@@ -55,6 +54,8 @@ public class Main {
         clientService.saveClient(bank, steve);
         clientService.saveClient(bank, olga);
 
-        System.out.println(bankReportService.getNumberOfAccounts(bank));
+        accountService.withdraw(standartCheckingAccount, 260);
+        accountService.withdraw(standartSavingAccount, 60);
+        System.out.println(standartCheckingAccount.getBalance());
     }
 }

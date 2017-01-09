@@ -2,23 +2,11 @@ package ua.spalah.bank.models;
 
 public class CheckingAccount extends SavingAccount implements Account {
 
-    private double balance;
     private double overdraft;
 
     public CheckingAccount(double balance, double overdraft) {
         super(balance);
-        this.balance = balance;
         this.overdraft = overdraft;
-    }
-
-    @Override
-    public double getBalance() {
-        return balance;
-    }
-
-    @Override
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 
     public double getOverdraft() {

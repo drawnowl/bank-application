@@ -19,19 +19,14 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void withdraw(Account account, double amount) throws NotEnoughFundsException {
-        if (amount <= account.getBalance()) {
-            if (account.getType() == AccountType.CHECKING) {
-                CheckingAccount checkingAccount = (CheckingAccount) account;
-                if (checkingAccount.getBalance() + checkingAccount.getOverdraft() > amount) {
-                    account.setBalance(account.getBalance() - amount);
-                }
-            } else {
+        if (account.getType().equals(AccountType.CHECKING)) {
+            CheckingAccount checkingAccount = (CheckingAccount) account;
+            if (checkingAccount.getBalance() + checkingAccount.getOverdraft() > amount) {
                 account.setBalance(account.getBalance() - amount);
             }
-        } else {
-            throw new NotEnoughFundsException(account.getBalance(), amount);
-        }
-
+        } else if(account.getBalance() >= amount) {
+            account.setBalance(account.getBalance() - amount);
+        } else { throw new NotEnoughFundsException(account.getBalance(), amount); }
     }
 
     @Override
