@@ -54,8 +54,8 @@ public class Main {
         clientService.saveClient(bank, steve);
         clientService.saveClient(bank, olga);
 
-        accountService.withdraw(standartCheckingAccount, 260);
-        accountService.withdraw(standartSavingAccount, 60);
+        accountService.withdraw(standartCheckingAccount,  300);
         System.out.println(standartCheckingAccount.getBalance());
+        System.out.println(standartCheckingAccount.getType());
     }
 }

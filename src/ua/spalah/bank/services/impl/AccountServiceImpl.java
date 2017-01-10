@@ -1,6 +1,7 @@
 package ua.spalah.bank.services.impl;
 
 import ua.spalah.bank.exceptions.NotEnoughFundsException;
+import ua.spalah.bank.exceptions.OverDraftLimitExceededException;
 import ua.spalah.bank.models.Account;
 import ua.spalah.bank.models.AccountType;
 import ua.spalah.bank.models.CheckingAccount;
@@ -18,15 +19,22 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void withdraw(Account account, double amount) throws NotEnoughFundsException {
-        if (account.getType().equals(AccountType.CHECKING)) {
-            CheckingAccount checkingAccount = (CheckingAccount) account;
-            if (checkingAccount.getBalance() + checkingAccount.getOverdraft() > amount) {
+    public void withdraw(Account account, double amount) throws NotEnoughFundsException, OverDraftLimitExceededException {
+        if(amount > 0) {
+            if (account.getType().equals(AccountType.CHECKING)) {
+                CheckingAccount checkingAccount = (CheckingAccount) account;
+                if (checkingAccount.getBalance() + checkingAccount.getOverdraft() > amount) {
+                    account.setBalance(account.getBalance() - amount);
+                } else {
+                    throw new OverDraftLimitExceededException(checkingAccount.getBalance(),
+                            amount, checkingAccount.getOverdraft());
+                }
+            } else if (account.getBalance() >= amount) {
                 account.setBalance(account.getBalance() - amount);
+            } else {
+                throw new NotEnoughFundsException(account.getBalance(), amount);
             }
-        } else if(account.getBalance() >= amount) {
-            account.setBalance(account.getBalance() - amount);
-        } else { throw new NotEnoughFundsException(account.getBalance(), amount); }
+        } else { throw new IllegalArgumentException(); }
     }
 
     @Override

@@ -46,32 +46,14 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void getClientFullInfo(Bank bank, Client client) throws ClientNotFoundException {
-        List<Client> clients = bank.getClients();
-        if(clients.contains(client)) {
-            for (Client c: clients) {
-                if (c.getName().equals(client.getName()))
-                {
-                    System.out.println(c.toString());
-                    return;
-                }
-            }
-        }
-        throw new ClientNotFoundException(client);
-    }
-
-    @Override
-    public double getTotalBalance(Bank bank, Client client) throws ClientNotFoundException {
+    public double getTotalBalance(Client client) {
         double result = 0;
-        List<Client> clients = bank.getClients();
-        if(clients.contains(client)) {
-            List<Account> accounts = client.getAccounts();
-            for (Account account : accounts) {
-                result += account.getBalance();
-            }
-            return result;
+
+        List<Account> accounts = client.getAccounts();
+        for (Account account : accounts) {
+            result += account.getBalance();
         }
-        throw new ClientNotFoundException(client);
+        return result;
     }
 
     @Override

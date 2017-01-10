@@ -5,7 +5,7 @@ public class SavingAccount implements Account {
     private double balance;
 
     public SavingAccount(double balance) {
-        if (balance < 0) {
+        if (balance <= 0) {
             return;
         }
         this.balance = balance;

@@ -13,8 +13,7 @@ public interface ClientService {
     List<Client> findAllClients(Bank bank);
     Client saveClient(Bank bank, Client client);
     void deleteClient(Bank bank, Client client) throws ClientNotFoundException;
-    void getClientFullInfo(Bank bank, Client client) throws ClientNotFoundException;
-    double getTotalBalance(Bank bank, Client client) throws ClientNotFoundException;
+    double getTotalBalance(Client client);
     void addAccount(Account account, Client client);
     void setActiveAccount(Account account, Client client);
 }
