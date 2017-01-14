@@ -23,7 +23,7 @@ public class BankCommander {
     private void init() {
         try {
             currentBank = new Bank();
-            commands = new Command[9];
+            commands = new Command[11];
 
             SavingAccount savingAccount = new SavingAccount(500);
             CheckingAccount checkingAccount = new CheckingAccount(250, 50);
@@ -33,12 +33,14 @@ public class BankCommander {
             BankReportServiceImpl bankReportService = new BankReportServiceImpl();
 
             AddClientCommand addClientCommand = new AddClientCommand(clientService);
+            AddAccountCommand addAccountCommand = new AddAccountCommand(clientService);
             DepositCommand depositCommand = new DepositCommand(accountService);
             ExitCommand exitCommand = new ExitCommand();
             FindClientCommand findClientCommand = new FindClientCommand(clientService);
             GetAccountsCommand getAccountsCommand = new GetAccountsCommand();
             GetBankInfoCommand getBankInfoCommand = new GetBankInfoCommand(bankReportService);
             RemoveClientCommand removeClientCommand = new RemoveClientCommand(clientService);
+            SelectActiveAccountCommand selectActiveAccountCommand = new SelectActiveAccountCommand();
             TransferCommand transferCommand = new TransferCommand(accountService);
             WithdrawCommand withdrawCommand = new WithdrawCommand(accountService);
 
@@ -51,6 +53,8 @@ public class BankCommander {
             commands[6] = removeClientCommand;
             commands[7] = transferCommand;
             commands[8] = withdrawCommand;
+            commands[9] = addAccountCommand;
+            commands[10] = selectActiveAccountCommand;
 
         } catch (Exception e) {
             RuntimeException runtimeException = new RuntimeException("Init Error");
