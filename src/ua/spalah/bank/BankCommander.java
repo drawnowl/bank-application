@@ -65,8 +65,8 @@ public class BankCommander {
 
     public void run() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
         init();
+
         while (true) {
             for (Command command : commands) {
                 command.printCommandInfo();
@@ -84,5 +84,6 @@ public class BankCommander {
     public static void main(String[] args) {
         BankCommander bankCommander = new BankCommander();
         bankCommander.run();
+        выолдуровфп
     }
 }

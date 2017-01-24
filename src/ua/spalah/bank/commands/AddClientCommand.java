@@ -24,16 +24,20 @@ public class AddClientCommand implements Command {
             String name = reader.readLine();
             System.out.println("Choose gender: MALE or FEMALE");
             String gender = reader.readLine();
+            System.out.println("From what city this client");
+            String city = reader.readLine();
 
             if(gender.equals("MALE")) {
-                BankCommander.currentClient = clientService.saveClient(BankCommander.currentBank, new Client(name, Gender.MALE));
+                BankCommander.currentClient = clientService.saveClient(BankCommander.currentBank,
+                        new Client(name, Gender.MALE, city));
             } else if(gender.equals("FEMALE")) {
-                BankCommander.currentClient = clientService.saveClient(BankCommander.currentBank, new Client(name, Gender.FEMALE));
+                BankCommander.currentClient = clientService.saveClient(BankCommander.currentBank,
+                        new Client(name, Gender.FEMALE, city));
             } else {
                 throw new VerifyError();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Enter correct data.");
         }
     }
 

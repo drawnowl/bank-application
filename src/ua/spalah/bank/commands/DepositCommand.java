@@ -1,4 +1,5 @@
 package ua.spalah.bank.commands;
+
 import ua.spalah.bank.BankCommander;
 import ua.spalah.bank.services.impl.AccountServiceImpl;
 
@@ -16,14 +17,16 @@ public class DepositCommand implements Command {
 
     @Override
     public void execute() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        if (BankCommander.currentClient != null) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("How much amount you want to deposit");
-        try {
-            double amount = Double.parseDouble(reader.readLine());
-            accountService.deposit(BankCommander.currentClient.getActiveAccount(), amount);
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("How much amount you want to deposit");
+            try {
+                double amount = Double.parseDouble(reader.readLine());
+                accountService.deposit(BankCommander.currentClient.getActiveAccount(), amount);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

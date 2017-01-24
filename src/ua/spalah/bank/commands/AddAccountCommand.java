@@ -20,29 +20,34 @@ public class AddAccountCommand implements Command {
     @Override
     public void execute() {
 
-        if(!BankCommander.currentBank.getClients().isEmpty()) {
+        if(BankCommander.currentClient != null) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             System.out.println("Add account to new client. SAVING or CHECKING?");
             try {
                 String accountType = reader.readLine();
-
                 double balance;
+
                 if (accountType.equals("SAVING")) {
                     System.out.println("Add initial balance:");
+
                     balance = Double.parseDouble(reader.readLine());
                     SavingAccount savingAccount = new SavingAccount(balance);
                     clientService.addAccount(savingAccount, BankCommander.currentClient);
                 } else if (accountType.equals("CHECKING")) {
                     System.out.println("Add initial balance:");
+
                     balance = Double.parseDouble(reader.readLine());
                     System.out.println("Add initial overdraft:");
                     double overdraft = Double.parseDouble(reader.readLine());
+
                     CheckingAccount checkingAccount = new CheckingAccount(balance, overdraft);
                     clientService.addAccount(checkingAccount, BankCommander.currentClient);
                 } else { throw new VerifyError(); }
-            } catch (IOException e) { e.printStackTrace(); }
-        } else { throw new NullPointerException(); }
+            } catch (IOException e) {
+                System.out.println("Enter correct data.");
+            }
+        }
     }
 
     @Override
