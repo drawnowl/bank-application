@@ -1,12 +1,15 @@
 package ua.spalah.bank.commands;
 
 import ua.spalah.bank.BankCommander;
+import ua.spalah.bank.services.impl.BankReportServiceImpl;
 
 public class SelectActiveAccountCommand implements Command {
 
     @Override
     public void execute() {
+        BankReportServiceImpl bankReportService = new BankReportServiceImpl();
 
+        System.out.println(bankReportService.getClientsSortedByCity(BankCommander.currentBank).toString());
         // BankCommander.currentClient.getActiveAccount(); - ? =)
     }
 

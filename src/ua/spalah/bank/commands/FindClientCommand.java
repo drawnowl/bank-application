@@ -22,7 +22,7 @@ public class FindClientCommand implements Command {
         try {
             String name = reader.readLine();
             try {
-                BankCommander.currentClient = clientService.findClientByName(BankCommander.currentBank, name);
+                System.out.println(BankCommander.currentClient = clientService.findClientByName(BankCommander.currentBank, name));
             } catch (ClientNotFoundException e) {
                 e.printStackTrace();
             }

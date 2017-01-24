@@ -5,9 +5,7 @@ import ua.spalah.bank.models.Bank;
 import ua.spalah.bank.models.Client;
 import ua.spalah.bank.services.BankReportService;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class BankReportServiceImpl implements BankReportService {
 
@@ -62,11 +60,15 @@ public class BankReportServiceImpl implements BankReportService {
     @Override
     public List<Client> getClientsSortedByName (Bank bank) {
         List<Client> clients = bank.getClients();
-        Collections.sort(clients, new Comparator<Client>() {
-            public int compare(Client o1, Client o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+        Collections.sort(clients, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+        return clients;
+    }
+
+    @Override
+    public Map<String, List<Client>> getClientsSortedByCity(Bank bank) {
+        Map<String, List<Client>> clients = new HashMap<>();
+        List list = new ArrayList(clients.entrySet());
+        Collections.sort(list, (Comparator<Map.Entry<String, List<Client>>>) (a, b) -> a.getKey().compareTo(b.getKey()));
         return clients;
     }
 }
