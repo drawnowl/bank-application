@@ -23,7 +23,7 @@ public class BankCommander {
     private void init() {
         try {
             currentBank = new Bank();
-            commands = new Command[11];
+            commands = new Command[12];
 
             SavingAccount savingAccount = new SavingAccount(500);
             CheckingAccount checkingAccount = new CheckingAccount(250, 50);
@@ -43,6 +43,7 @@ public class BankCommander {
             SelectActiveAccountCommand selectActiveAccountCommand = new SelectActiveAccountCommand();
             TransferCommand transferCommand = new TransferCommand(accountService);
             WithdrawCommand withdrawCommand = new WithdrawCommand(accountService);
+            GetClientsByCity getClientsByCity = new GetClientsByCity(bankReportService);
 
             commands[0] = addClientCommand;
             commands[1] = depositCommand;
@@ -55,6 +56,7 @@ public class BankCommander {
             commands[8] = withdrawCommand;
             commands[9] = addAccountCommand;
             commands[10] = selectActiveAccountCommand;
+            commands[11] = getClientsByCity;
 
         } catch (Exception e) {
             RuntimeException runtimeException = new RuntimeException("Init Error");
@@ -63,7 +65,7 @@ public class BankCommander {
         }
     }
 
-    public void run() {
+    void run() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         init();

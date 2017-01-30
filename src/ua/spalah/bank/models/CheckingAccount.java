@@ -13,10 +13,6 @@ public class CheckingAccount extends SavingAccount implements Account {
         return overdraft;
     }
 
-    public void setOverdraft(double overdraft) {
-        this.overdraft = overdraft;
-    }
-
     @Override
     public AccountType getType() {
         return AccountType.CHECKING;

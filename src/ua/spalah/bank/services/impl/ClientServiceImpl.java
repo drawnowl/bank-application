@@ -12,8 +12,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client findClientByName(Bank bank, String name) throws ClientNotFoundException {
-        List<Client> clients = bank.getClients();
-        for (Client client: clients) {
+        for (Client client: bank.getClients()) {
             if (client.getName().equals(name)) {
                 return client;
             }
@@ -23,8 +22,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<Client> findAllClients(Bank bank) {
-        List<Client> clients = bank.getClients();
-        return clients;
+        return bank.getClients();
     }
 
     @Override

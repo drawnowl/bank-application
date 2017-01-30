@@ -5,9 +5,7 @@ import ua.spalah.bank.models.Bank;
 import ua.spalah.bank.models.Client;
 import ua.spalah.bank.services.BankReportService;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class BankReportServiceImpl implements BankReportService {
 
@@ -19,9 +17,8 @@ public class BankReportServiceImpl implements BankReportService {
     @Override
     public int getNumberOfAccounts(Bank bank) {
         int result = 0;
-        List<Client> clients = bank.getClients();
 
-        for (Client client : clients) {
+        for (Client client : bank.getClients()) {
             result += client.getAccounts().size();
         }
         return result;
@@ -30,12 +27,9 @@ public class BankReportServiceImpl implements BankReportService {
     @Override
     public double getTotalAccountSum(Bank bank) {
         double result = 0;
-        List<Client> clients = bank.getClients();
-        List<Account> accounts;
 
-        for (Client client : clients) {
-            accounts = client.getAccounts();
-            for (Account account: accounts) {
+        for (Client client : bank.getClients()) {
+            for (Account account : client.getAccounts()) {
                 result += account.getBalance();
             }
         }
@@ -43,12 +37,11 @@ public class BankReportServiceImpl implements BankReportService {
     }
 
     @Override
-    public double getBankCreditSum (Bank bank) {
+    public double getBankCreditSum(Bank bank) {
         double result = 0;
-        List<Client> clients = bank.getClients();
         List<Account> accounts;
 
-        for (Client client : clients) {
+        for (Client client : bank.getClients()) {
             accounts = client.getAccounts();
             for (Account account : accounts) {
                 if (account.getBalance() < 0) {
@@ -60,7 +53,7 @@ public class BankReportServiceImpl implements BankReportService {
     }
 
     @Override
-    public List<Client> getClientsSortedByName (Bank bank) {
+    public List<Client> getClientsSortedByName(Bank bank) {
         List<Client> clients = bank.getClients();
         Collections.sort(clients, new Comparator<Client>() {
             public int compare(Client o1, Client o2) {
@@ -68,5 +61,15 @@ public class BankReportServiceImpl implements BankReportService {
             }
         });
         return clients;
+    }
+
+    @Override
+    public Map<String, Client> getClientsByCity(Bank bank) {
+        Map<String, Client> clientMap = new TreeMap<>();
+
+        for (Client client: bank.getClients()) {
+            clientMap.put(client.getCity(), client);
+        }
+        return clientMap;
     }
 }
